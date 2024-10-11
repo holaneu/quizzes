@@ -340,13 +340,13 @@ body {
 
 .status-level {
   background-color: #64edcf;
-  color: #317d6c;
+  color: var(--bg-main);
   cursor: pointer;
 }
 
 .status-xp {
   background-color: #d2d442;
-  color: #646521;
+  color: var(--bg-main);
   cursor: pointer;
 }
 
