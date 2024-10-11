@@ -5,6 +5,10 @@ let currentQuizHintsUsed = 0;
 let currentQuizProgress = [];
 let currentQuiz = null;
 
+// configs
+const userProfileStorageKey = "quizzes_user_profile";
+const xpPointsToLevel = 20;
+
 // Universal function to navigate between screens
 function navigateToScreen(screenId) {
     // Hide all sections
@@ -154,26 +158,26 @@ function resetQuiz() {
 // Profile
 // Save user profile to local storage
 function saveUserProfile(profile) {
-  localStorage.setItem("quizzes_user_profile", JSON.stringify(profile));
+  localStorage.setItem(userProfileStorageKey, JSON.stringify(profile));
 }
 
 // Load user profile from local storage
 function loadUserProfile() {
-  const profile = localStorage.getItem("quizzes_user_profile");
+  const profile = localStorage.getItem(userProfileStorageKey);
   return profile ? JSON.parse(profile) : null;
 }
 
 // Load user profile from local storage and populate profile screen
-function loadUserProfileIntoUI() {
+function loadUserProfileIntoUI(previousProfileStats) {
   const profile = loadUserProfile(); // Function to load profile from localStorage (defined earlier)
 
   if (profile) {
     document.getElementById("topbar-totalXPPoints").textContent = `${profile.totalXPPoints}`;
-    document.getElementById("topbar-currentLevel").textContent = `${profile.currentLevel}`;
+    document.getElementById("topbar-currentLevel").textContent = `${profile.level}`;
 
     document.getElementById("info-name").textContent = `${profile.name}`;
     document.getElementById("stat-totalXPPoints").textContent = `${profile.totalXPPoints}`;
-    document.getElementById("stat-currentLevel").textContent = `${profile.currentLevel}`;
+    document.getElementById("stat-currentLevel").textContent = `${profile.level}`;
     document.getElementById("stat-totalScore").textContent = `${profile.totalScore} %`;
     document.getElementById("stat-quizzesCompleted").textContent = `${profile.quizzesCompleted}`;
     document.getElementById("stat-questionsCompleted").textContent = `${profile.questionsCompleted}`;
@@ -189,12 +193,43 @@ function loadUserProfileIntoUI() {
       achievementItem.textContent = achievement;
       achievementsList.appendChild(achievementItem);
     });
+
+    if (previousProfileStats) {
+      if (profile.level > previousProfileStats.level) {
+        const levelMsg = "You achieved new level " + profile.level;
+        console.log(levelMsg);
+        alert(levelMsg);
+      }
+    }
   }
+}
+
+function resetUserProfile() {
+  const newUserProfile = {
+    name: "user" + Math.random(1000),
+    email: "",
+    avatar: "",
+    quizzesCompleted: 0,
+    questionsCompleted: 0,
+    questionsCompletedCorrectly: 0,
+    totalScore: 0,
+    totalXPPoints: 0,
+    achievements: [],
+    level: 1,
+    lastActiveDate: new Date().toISOString(),
+    settings: {
+      theme: "dark",
+      notifications: false
+    }
+  };
+  saveUserProfile(newUserProfile);
 }
 
 // Initializing a new profile if none exists
 let userProfile = loadUserProfile();
 if (!userProfile) {
+  resetUserProfile();
+  /*
   userProfile = {
     name: "",
     email: "",
@@ -205,7 +240,7 @@ if (!userProfile) {
     totalScore: 0,
     totalXPPoints: 0,
     achievements: [],
-    currentLevel: 1,
+    level: 1,
     lastActiveDate: new Date().toISOString(),
     settings: {
       theme: "dark",
@@ -213,6 +248,18 @@ if (!userProfile) {
     }
   };
   saveUserProfile(userProfile);
+  */
+}
+
+// Export user profile to JSON file
+function exportUserProfile() {
+  const profile = loadUserProfile();
+  const json = JSON.stringify(profile, null, 2); // Pretty-print the JSON with 2 spaces
+  const blob = new Blob([json], {type: 'application/json'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'quizzes_user_profile.json';
+  link.click();
 }
 
 function formatDateToCET(dateString) {
@@ -239,6 +286,11 @@ function updateUserProfileStats(statName, value) {
       return;
   }
 
+  // snapshot of last profile stats
+  let previousProfileStats = {
+    level: profile.level
+  };
+
   // Update the specific statistic
   switch (statName) {
       case 'totalXPPoints':
@@ -263,7 +315,7 @@ function updateUserProfileStats(statName, value) {
   }
 
   //const calculatedLevel = Math.floor(profile.totalXPPoints / 20);
-  profile.currentLevel = Math.floor(profile.totalXPPoints / 20) + 1; //calculatedLevel > 0 ? calculatedLevel : 1;
+  profile.level = Math.floor(profile.totalXPPoints / xpPointsToLevel) + 1; //calculatedLevel > 0 ? calculatedLevel : 1;
 
   profile.lastActiveDate = new Date().toISOString();
 
@@ -271,7 +323,7 @@ function updateUserProfileStats(statName, value) {
   saveUserProfile(profile);
 
   // Refresh the profile screen UI with the updated values
-  loadUserProfileIntoUI();
+  loadUserProfileIntoUI(previousProfileStats);
 }
 
 // Initialize the app 
