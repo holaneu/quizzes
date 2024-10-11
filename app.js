@@ -204,7 +204,7 @@ function loadUserProfileIntoUI(previousProfileStats) {
   }
 }
 
-function resetUserProfile() {
+function resetUserProfile(resetWithConfirmation) {
   const newUserProfile = {
     name: "user" + Math.random(1000),
     email: "",
@@ -222,33 +222,16 @@ function resetUserProfile() {
       notifications: false
     }
   };
-  saveUserProfile(newUserProfile);
-}
 
-// Initializing a new profile if none exists
-let userProfile = loadUserProfile();
-if (!userProfile) {
-  resetUserProfile();
-  /*
-  userProfile = {
-    name: "",
-    email: "",
-    avatar: "",
-    quizzesCompleted: 0,
-    questionsCompleted: 0,
-    questionsCompletedCorrectly: 0,
-    totalScore: 0,
-    totalXPPoints: 0,
-    achievements: [],
-    level: 1,
-    lastActiveDate: new Date().toISOString(),
-    settings: {
-      theme: "dark",
-      notifications: false
+  if (resetWithConfirmation === true) {
+    if (confirm("!!! Are you sure you want to reset (delete) your profile?") == true) {
+      saveUserProfile(newUserProfile);
+      loadUserProfileIntoUI();
     }
-  };
-  saveUserProfile(userProfile);
-  */
+  } else {
+    saveUserProfile(newUserProfile);
+    loadUserProfileIntoUI();
+  }
 }
 
 // Export user profile to JSON file
@@ -329,6 +312,11 @@ function updateUserProfileStats(statName, value) {
 // Initialize the app 
 // fetching quiz data
 fetchQuizData();
+
+// Initializing a new profile if none exists
+let userProfile = loadUserProfile();
+if (!userProfile) {
+  resetUserProfile();}
 
 // fetching profile data
 loadUserProfileIntoUI()
