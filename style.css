@@ -1,0 +1,362 @@
+/* base css variables */
+:root {  
+  /* Primary Colors */
+  --color-primary: #6c63ff; /* Main branding color. Used for primary actions like buttons and overlay buttons. */
+  --color-primary-hover: #8178ff; /* Hover version of main */  
+  --color-secondary: #5753c9; /* TODO: define color and its purpose (it should not be hover color of primary color, but standalone color */
+  
+  /* Background Colors */
+  --bg-main: #121212; /* Main background of the app */
+  --bg-main-hover: #1c1c1c; /* Hover version of main */
+  --bg-secondary: #2b2b2b; /* Background for cards, input fields */
+  --bg-secondary-hover: #373737; /* Hover version of secondary */
+  --bg-tertiary: #444; /* Background for badges, overlay elements */
+  --bg-tertiary-hover: #555; /* Hover version of tertiary */
+  --bg-status-neutral: #457981;
+  --bg-status-success: #73be85;
+  --bg-status-fail: #b1676e; /* Error or validation warning messages */
+  --bg-status-attention: #c0ac6e; /* Warning or caution */
+
+  
+   /* Text Colors */
+  --text-main: #e0e0e0; /* Main text color */
+  --text-secondary: #e0e0e0; /* Main text color */
+  --text-tertiary: #e0e0e0;
+  --text-muted: #9e9e9e; /* Muted text for placeholders, captions. Used for less important text, such as placeholders. */
+  --text-inverted: #fff; /* Text on dark or colored backgrounds (e.g., buttons) or on hover states */  
+
+  /* State Colors */
+  --color-success: #73be85; /* Success messages */
+  --color-error: #b1676e; /* Error or validation warning messages */
+  --color-warning: #c0ac6e; /* Warning or caution */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* Utilities */
+.hidden {
+    display: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.status-neutral {
+  background-color: var(--bg-status-neutral);
+  color: white;
+}
+
+.status-success {
+  background-color: var(--bg-status-success);
+  color: white;
+}
+
+.status-fail {
+  background-color: var(--bg-status-fail);
+  color: white;
+}
+
+.status-attention {
+  background-color: var(--bg-status-attention);
+  color: white;
+}
+
+/* UI elements */
+.screen-title {
+    text-align: center;
+    color: var(-text-main);
+}
+
+.screen-sub-title {
+    text-align: center;
+    color: var(-text-secondary);
+}
+
+.section-title {
+    color: gray; /*var(--text-secondary);*/
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 15px;    
+    margin-bottom: 13px; 
+    text-align: left; 
+    letter-spacing: 2px; 
+}
+
+.header3 {
+  color: var(--text-secondary);
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 15px;    
+  margin-bottom: 15px; 
+  text-align: left;   
+}
+
+.question-header {
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;    
+  margin-bottom: 15px; 
+  text-align: center;   
+}
+
+.btn {
+    margin: 5px 0;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 16px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--bg-secondary-hover);
+}
+
+.btn-outline {
+  margin: 5px 0;
+  width: 100%;
+  background: none;
+  border: 2px solid var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: 16px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--text-main);
+    max-width: 400px;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-tertiary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-tertirary);
+    font-size: 14px;
+}
+
+.btn-tertiary:hover {
+    background-color: var(--bg-tertiary-hover);
+}
+
+.back-btn {
+    cursor: pointer;
+    margin-bottom: 10px;
+    /*display: inline-block;*/
+    color: var(--text-main);
+    text-align: left;
+}
+
+.back-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.text {
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.text-list-item {
+  padding: 2px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--bg-secondary);
+}
+
+.card-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds space between cards */
+}
+
+.card-item {
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: none; /* Remove the default button border */
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.card-item:hover {
+    background-color: var(--bg-secondary-hover);
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+/* Content inside the card button */
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 16px;
+}
+
+.card-badge {
+    background-color: var(--bg-tertiary);
+    color: var(--text-inverted);
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.h-space {
+  min-height: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.msg-success {
+  color: var(--color-success);
+}
+
+.msg-error {
+  color: var(--color-error);
+}
+
+.top-nav-bar-icon {
+    /*font-size: 24px;*/
+    cursor: pointer;
+    color: gray;
+    margin-left: 10px;
+    height: 26px;
+    width: 26px;
+}
+
+.top-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  /*color: var(--color-primary);*/
+  font-style: italic;
+  background: linear-gradient(to bottom, #C7B8EA, #6c5ce7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-input {
+  margin: 5px 0;
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 14px;
+  min-width: 70px;
+}
+
+.completion-status-banner {
+  /*background-color: var(--bg-status-neutral); */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 0 auto; 
+  text-align: center;
+}
+
+.banner-title {
+  font-size: 24px; 
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.banner-message {
+  font-size: 16px; 
+  color: #f1f1f1;
+  margin-bottom: 20px;
+}
+
+.banner-scorecard {
+  font-size: 48px; 
+  font-weight: bold;
+  color: white;
+}
+
+.text-list-item span {
+  font-weight: bold;
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+
+
+/* Home Screen */
+.status-card {
+  display: inline;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 3px 5px;;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.status-level {
+  background-color: #64edcf;
+  color: #317d6c;
+  cursor: pointer;
+}
+
+.status-xp {
+  background-color: #d2d442;
+  color: #646521;
+  cursor: pointer;
+}
+
+/* Quiz Detail Screen */
+#quiz-detail-screen {
+  text-align: center;
+}
+
+#quiz-info {
+  color:gray;
+  font-size: 14px;
+}
+  
