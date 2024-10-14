@@ -250,7 +250,6 @@ body {
 }
 
 .top-nav-bar-icon {
-    /*font-size: 24px;*/
     cursor: pointer;
     color: gray;
     margin-left: 10px;
@@ -292,7 +291,6 @@ body {
 }
 
 .completion-status-banner {
-  /*background-color: var(--bg-status-neutral); */
   color: white;
   padding: 20px;
   border-radius: 10px;

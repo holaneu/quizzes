@@ -1,4 +1,3 @@
-# Quizzes
 
 ## App Overview
 - **App Name:** Quizzes
@@ -20,6 +19,8 @@
   - XP is accumulated, and once a certain threshold is reached, the user progresses to the next level.
   - The XP thresholds for levels are calculated as follows: `Level = Math.floor(totalXPPoints / 20)`.
   - The profile screen and XP scorecard on home screen are dynamically updated to reflect the user's current level and XP.
+- **Level-up notifications**: If a user reaches a new level, a visually appealing banner is displayed during question or quiz completion, instead of immediately when the stats are updated.
+
 
 ### User Actions (Stories)
 **As a user** I want to:
@@ -28,6 +29,7 @@
 - Immediate feedback after I answer a question so that I know if I was correct.
 - Track my progress so that I can see how well I am doing in the quiz.
 - See my final score at the end of the quiz so that I know how many questions I got right.
+- See a notification when I level up, integrated into the quiz completion banners.
 
 
 ## App Layout and UI Elements
@@ -36,8 +38,13 @@
 - **Purpose:** Displays a list of quizes available.
 - **Content:** List of all quizes available.
 - **UI Elements**:
-  - App name as title
-  - List of items - Each item includes a badge displaying the number of questions per quiz, background color #1e1e1e, border 1px solid #333.
+  - Top bar nav
+    - Logo
+    - Status card (status level)
+    - Status card (status xp)
+    - Profile icon
+  - Card list 
+    - Card item - each item includes a badge displaying the number of questions per quiz, background color #1e1e1e, border 1px solid #333.
 - **Navigation:** Users can tap a quiz item to go to the "quiz detail screen".
 
 ### **Quiz Detail Screen:**
@@ -46,22 +53,22 @@
 - **UI Elements:**
   - Back button with left-arrow icon
   - Screen title (Quiz title)
-  - Screen sub-title (Number of quiz questions)
+  - Label (Number of quiz questions)
   - Label (Score info)
   - Label (Progress info)
   - Label (Hints used info)
-  - Devider
-  - Header or Section title (Question title)
+  - Horizontal space
+  - Header (Question title)
   - List of buttons (Options - List of asnwer options)
     - Button (Single answer option)
-  - Button (Show hint)
-    - has a less prominent style compared to answer buttons.    
-  - Hint text - Text of shown hint
-  - Button (Next question)
-  - Header (Question result status - "Correct / Incorrect")
-  - Text (Question result detail - "Correct answer is...")
-  - Header (Quiz result status)
-  - Header (Quiz result score)
+  - Button outline (Show hint)
+  - Text (Text of shown hint)
+  - Button primary (Next question)
+  - Completion status banner based on situaction applied to:
+    - Question correct answer
+    - Question incorrect answer
+    - Quiz completed
+    - Level-up announcement
 - **Navigation:** Users can tap a back icon to go to the "home screen".
 
 ### **Profile Screen:**  
@@ -79,6 +86,8 @@
   - Text item list (XP points, level, score, etc.)
   - Section title (Achievements)
   - Card list (Achievements)
+  - Button outline (Export profile)
+  - Button outline (Reset profile)
 - **Navigation:** Users can tap a back icon to go to the "home screen".
   
 
@@ -97,8 +106,8 @@ It includes details like color schemes (color palette), font choices, icon style
   - Default theme: dark theme
   - Colors: 
     - note: they are also technically defined within the styles.css file using "CSS Custom Properties (CSS variables)". 
-    - > ```css
-        {  
+    ```css
+        :root {  
           /* Primary Colors */
           --color-primary: #6c63ff; /* Main branding color. Used for primary actions like buttons and overlay buttons. */
           --color-primary-hover: #8178ff; /* Hover version of main */  
@@ -111,6 +120,11 @@ It includes details like color schemes (color palette), font choices, icon style
           --bg-secondary-hover: #373737; /* Hover version of secondary */
           --bg-tertiary: #444; /* Background for badges, overlay elements */
           --bg-tertiary-hover: #555; /* Hover version of tertiary */
+          --bg-status-neutral: #457981;
+          --bg-status-success: #73be85;
+          --bg-status-fail: #b1676e; /* Error or validation warning messages */
+          --bg-status-attention: #c0ac6e; /* Warning or caution */
+
           
           /* Text Colors */
           --text-main: #e0e0e0; /* Main text color */
@@ -123,7 +137,7 @@ It includes details like color schemes (color palette), font choices, icon style
           --color-success: #73be85; /* Success messages */
           --color-error: #b1676e; /* Error or validation warning messages */
           --color-warning: #c0ac6e; /* Warning or caution */
-        } 
+        }
       ```
 
 
@@ -132,13 +146,12 @@ It includes details like color schemes (color palette), font choices, icon style
 - **SPA using "Fragmentation using HTML sections"** - each screen (view) is in a separate <section> tag. When displaying a specific screen, hide the others and make the desired one visible. Use universal function "navigateToScreen(screenId)" to navigate between screens.
 - **Foundational UI elements** are defined in CSS file by classes. Then in HTML file these UI elements' css classes are utilized to build the UI aligned with the "App Layout and UI Elements" chapter of this dodument.
 - **Use CSS Custom Properties** to define and use CSS variables. The main purpose is to define some values as "configurations" in one place as variables and then apply these variables within the CSS code. This is used for example to style UI elements by appling the defined colors (app color palette) variables.
-Here's an example how to use custom properties. See the 
-  
-- **Using "space ui elements"** to apply some kind of margins and spacing, especially horizontal. In case there needs to be some "horizontal space" added at the specific place between UI elements, rather then adding additional margins to the specific existing elements I prefer to add <div class"space"></div> to the HTML code to specify the "space" or "gap".
+Here's an example how to use custom properties.  
+- **Using "spacing ui elements"** to apply some kind of margins and spacing, especially horizontal. In case there needs to be some "horizontal space" added at the specific place between UI elements, rather then adding additional margins to the specific existing elements I prefer to add <div class"space"></div> to the HTML code to specify the "space" or "gap".
 - **Data Management and Storage:**
   - The app stores user profile information locally in the browser's `localStorage`. This includes user statistics, XP points, achievements, and settings.
   - Quiz data is fetched from the `quizzes-data.js` file and loaded dynamically when the app is initialized.
-- Folder and file structure:
+- Folder and file structure: TBD
   
 
 
