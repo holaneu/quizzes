@@ -1,13 +1,28 @@
+// app configs
+const appConfigs = {
+  userProfileStorageKey: "quizzes_user_profile",
+  xpPointsToLevel: 20
+};
+
 let quizzes = [];
 let currentQuizQuestion = 0;
 let currentQuizScore = 0;
 let currentQuizHintsUsed = 0;
 let currentQuizProgress = [];
 let currentQuiz = null;
+let hasLeveledUp = false;
 
-// configs
-const userProfileStorageKey = "quizzes_user_profile";
-const xpPointsToLevel = 20;
+// UI components
+function getLevelUpBanner() {
+  const profile = loadUserProfile();
+  return `
+      <div class="h-space"></div>
+      <div class="completion-status-banner status-attention">
+        <div class="banner-title">Congratulations! Level Up!</div>
+        <div class="banner-message">You achieved new level ${profile.level}!</div>
+      </div>
+  `;
+}
 
 // Universal function to navigate between screens
 function navigateToScreen(screenId) {
@@ -71,7 +86,12 @@ function loadQuestion() {
 function checkAnswer(choice) {
     const q = currentQuiz.questions[currentQuizQuestion];
     const resultDiv = document.getElementById('result');
-    if (choice === q.answer) {
+    if (choice === q.answer) {        
+        currentQuizScore++;
+        currentQuizProgress.push("✓");        
+        updateUserProfileStats('totalXPPoints', 1);
+        updateUserProfileStats('questionsCompletedCorrectly', 1);
+
         resultDiv.innerHTML = `
             <div class="completion-status-banner status-success">
               <div class="banner-title">Correct :-)</div>
@@ -79,39 +99,40 @@ function checkAnswer(choice) {
               <div class="banner-message">${q.options[q.answer]}</div>
             </div>
         `;
-        currentQuizScore++;
-        currentQuizProgress.push("✓");        
-        updateUserProfileStats('totalXPPoints', 1);
-        updateUserProfileStats('questionsCompletedCorrectly', 1);        
+        
+        if (hasLeveledUp) {
+          resultDiv.innerHTML += getLevelUpBanner();
+          hasLeveledUp = false; // Reset flag
+        }
       
     } else {
+        currentQuizProgress.push("✗");
         resultDiv.innerHTML = `            
             <div class="completion-status-banner status-fail">
               <div class="banner-title">Incorrect</div>
               <div class="banner-message">The correct answer is:</div>
               <div class="banner-message">${q.options[q.answer]}</div>              
             </div>
-        `;
-        currentQuizProgress.push("✗");
+        `;        
     }
     currentQuestionScored++;
     updateQuizInfo();
     updateUserProfileStats('questionsCompleted', 1);
     document.getElementById('options').innerHTML = '';
-    document.getElementById('hint-btn').classList.add('hidden'); //.style.display = 'none';
+    document.getElementById('hint-btn').classList.add('hidden'); 
     document.getElementById('hint').textContent = '';
-    document.getElementById('hint').classList.add('hidden'); //.style.display = 'none'; 
-    document.getElementById('next-btn').classList.remove('hidden'); //.style.display = 'block';
+    document.getElementById('hint').classList.add('hidden'); 
+    document.getElementById('next-btn').classList.remove('hidden'); 
 }
 
 // Show hint for the current question
 function showHint() {
     const hintText = document.getElementById('hint');
     hintText.textContent = currentQuiz.questions[currentQuizQuestion].hint;
-    hintText.classList.remove('hidden'); //.style.display = 'block';
+    hintText.classList.remove('hidden'); 
     currentQuizHintsUsed++;
     updateQuizInfo();
-    document.getElementById('hint-btn').classList.add('hidden'); //.style.display = 'none';
+    document.getElementById('hint-btn').classList.add('hidden'); 
 }
 
 // Load the next question
@@ -122,20 +143,28 @@ function nextQuestion() {
     } else {
       document.getElementById('question').textContent = "";
       document.getElementById('options').innerHTML = '';
-      document.getElementById('hint-btn').classList.add('hidden'); //.style.display = 'none';
-      document.getElementById('next-btn').classList.add('hidden'); //.style.display = 'none';
+      document.getElementById('hint-btn').classList.add('hidden'); 
+      document.getElementById('next-btn').classList.add('hidden');      
       const quizScorePercent = Math.round((currentQuizScore / currentQuiz.questions.length) * 100);
-      document.getElementById('result').innerHTML = `
+      updateUserProfileStats('quizzesCompleted', 1);
+      if (quizScorePercent >= 70) {
+        updateUserProfileStats('totalXPPoints', 2);         
+      }  
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `
           <div class="completion-status-banner status-neutral">
             <div class="banner-title">You completed the quiz!</div>
             <div class="banner-message">Your final score: ${currentQuizScore}/${currentQuiz.questions.length}</div>
             <div class="banner-scorecard">${quizScorePercent} %</div>
           </div>          
       `;
-      updateUserProfileStats('quizzesCompleted', 1);
-      if (quizScorePercent >= 70) {
-        updateUserProfileStats('totalXPPoints', 2);         
-      }      
+
+      if (hasLeveledUp) {        
+        resultDiv.innerHTML += getLevelUpBanner();
+        hasLeveledUp = false; // Reset flag
+      }
+          
     }
 }
 
@@ -158,17 +187,17 @@ function resetQuiz() {
 // Profile
 // Save user profile to local storage
 function saveUserProfile(profile) {
-  localStorage.setItem(userProfileStorageKey, JSON.stringify(profile));
+  localStorage.setItem(appConfigs.userProfileStorageKey, JSON.stringify(profile));
 }
 
 // Load user profile from local storage
 function loadUserProfile() {
-  const profile = localStorage.getItem(userProfileStorageKey);
+  const profile = localStorage.getItem(appConfigs.userProfileStorageKey);
   return profile ? JSON.parse(profile) : null;
 }
 
 // Load user profile from local storage and populate profile screen
-function loadUserProfileIntoUI(previousProfileStats) {
+function loadUserProfileIntoUI(profileBeforeUpdate) {
   const profile = loadUserProfile(); // Function to load profile from localStorage (defined earlier)
 
   if (profile) {
@@ -194,13 +223,6 @@ function loadUserProfileIntoUI(previousProfileStats) {
       achievementsList.appendChild(achievementItem);
     });
 
-    if (previousProfileStats) {
-      if (profile.level > previousProfileStats.level) {
-        const levelMsg = "You achieved new level " + profile.level;
-        console.log(levelMsg);
-        alert(levelMsg);
-      }
-    }
   }
 }
 
@@ -224,7 +246,7 @@ function resetUserProfile(resetWithConfirmation) {
   };
 
   if (resetWithConfirmation === true) {
-    if (confirm("!!! Are you sure you want to reset (delete) your profile?") == true) {
+    if (confirm("!!! Are you sure you want to reset (delete) your profile?") === true) {
       saveUserProfile(newUserProfile);
       loadUserProfileIntoUI();
     }
@@ -269,10 +291,8 @@ function updateUserProfileStats(statName, value) {
       return;
   }
 
-  // snapshot of last profile stats
-  let previousProfileStats = {
-    level: profile.level
-  };
+  // snapshot of last profile stats using object deep copy
+  const profileBeforeUpdate = JSON.parse(JSON.stringify(profile));; 
 
   // Update the specific statistic
   switch (statName) {
@@ -298,15 +318,20 @@ function updateUserProfileStats(statName, value) {
   }
 
   //const calculatedLevel = Math.floor(profile.totalXPPoints / 20);
-  profile.level = Math.floor(profile.totalXPPoints / xpPointsToLevel) + 1; //calculatedLevel > 0 ? calculatedLevel : 1;
+  profile.level = Math.floor(profile.totalXPPoints / appConfigs.xpPointsToLevel) + 1; //calculatedLevel > 0 ? calculatedLevel : 1;
 
   profile.lastActiveDate = new Date().toISOString();
 
   // Save the updated profile back to localStorage
   saveUserProfile(profile);
 
+  // Check if the level has increased
+  if (profile.level > profileBeforeUpdate.level) {
+    hasLeveledUp = true; // Set flag
+  }
+
   // Refresh the profile screen UI with the updated values
-  loadUserProfileIntoUI(previousProfileStats);
+  loadUserProfileIntoUI();
 }
 
 // Initialize the app 
@@ -316,7 +341,6 @@ fetchQuizData();
 // Initializing a new profile if none exists
 let userProfile = loadUserProfile();
 if (!userProfile) {
-  resetUserProfile();}
-
-// fetching profile data
-loadUserProfileIntoUI()
+  resetUserProfile();
+}
+loadUserProfileIntoUI();

@@ -292,7 +292,6 @@ body {
 }
 
 .completion-status-banner {
-  /*background-color: var(--bg-status-neutral); */
   color: white;
   padding: 20px;
   border-radius: 10px;
