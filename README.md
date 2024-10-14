@@ -106,7 +106,7 @@ It includes details like color schemes (color palette), font choices, icon style
   - Default theme: dark theme
   - Colors: 
     - note: they are also technically defined within the styles.css file using "CSS Custom Properties (CSS variables)". 
-    - > ```css
+    ```css
         {  
           /* Primary Colors */
           --color-primary: #6c63ff; /* Main branding color. Used for primary actions like buttons and overlay buttons. */
