@@ -106,8 +106,8 @@ It includes details like color schemes (color palette), font choices, icon style
   - Default theme: dark theme
   - Colors: 
     - note: they are also technically defined within the styles.css file using "CSS Custom Properties (CSS variables)". 
-    - > ```css
-        {  
+    ```css
+        :root {  
           /* Primary Colors */
           --color-primary: #6c63ff; /* Main branding color. Used for primary actions like buttons and overlay buttons. */
           --color-primary-hover: #8178ff; /* Hover version of main */  
@@ -120,6 +120,11 @@ It includes details like color schemes (color palette), font choices, icon style
           --bg-secondary-hover: #373737; /* Hover version of secondary */
           --bg-tertiary: #444; /* Background for badges, overlay elements */
           --bg-tertiary-hover: #555; /* Hover version of tertiary */
+          --bg-status-neutral: #457981;
+          --bg-status-success: #73be85;
+          --bg-status-fail: #b1676e; /* Error or validation warning messages */
+          --bg-status-attention: #c0ac6e; /* Warning or caution */
+
           
           /* Text Colors */
           --text-main: #e0e0e0; /* Main text color */
@@ -132,7 +137,7 @@ It includes details like color schemes (color palette), font choices, icon style
           --color-success: #73be85; /* Success messages */
           --color-error: #b1676e; /* Error or validation warning messages */
           --color-warning: #c0ac6e; /* Warning or caution */
-        } 
+        }
       ```
 
 
