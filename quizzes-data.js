@@ -1,5 +1,81 @@
 const jsFileQuizzesData = [
   {
+    "name": "Světové strany",
+    "id": "9bA7cV2pX3",
+    "created": "2024-10-15",
+    "tags": ["svetove_strany"],
+    "questions": [
+      {
+        "question": "Jaká světová strana je na severní straně kompasu?",
+        "options": ["Západ", "Východ", "Jih", "Sever"],
+        "answer": 3,
+        "hint": "Najdete ji na horní části kompasu."
+      },
+      {
+        "question": "Jakou barvou je často označována jižní světová strana na mapách?",
+        "options": ["Modrou", "Červenou", "Zelenou", "Žlutou"],
+        "answer": 1,
+        "hint": "Barva bývá spojena s teplejšími směry."
+      },
+      {
+        "question": "Která světová strana se při pohledu na mapu nachází dole?",
+        "options": ["Západ", "Jih", "Sever", "Východ"],
+        "answer": 1,
+        "hint": "Je v dolní části mapy."
+      },
+      {
+        "question": "Která světová strana leží mezi severem a východem?",
+        "options": ["Jihovýchod", "Jihozápad", "Severovýchod", "Severozápad"],
+        "answer": 2,
+        "hint": "Nachází se východně od severu."
+      },
+      {
+        "question": "Jaká světová strana je opačná k západu?",
+        "options": ["Sever", "Východ", "Jih", "Jihozápad"],
+        "answer": 1,
+        "hint": "Je na opačné straně od západu."
+      },
+      {
+        "question": "Kterou světovou stranu označuje slunce při svém západu?",
+        "options": ["Sever", "Východ", "Jih", "Západ"],
+        "answer": 3,
+        "hint": "Slunce tam zapadá každý večer."
+      },
+      {
+        "question": "Jak se nazývá světová strana, který je mezi západem a severem?",
+        "options": ["Severozápad", "Jihozápad", "Jihovýchod", "Východosever"],
+        "answer": 0,
+        "hint": "Nachází se mezi severem a západem."
+      },
+      
+      {
+        "question": "Která světová strana se při pohledu na mapu nachází vlevo?",
+        "options": ["Východ", "Jihozápad", "Západ", "Severozápad"],
+        "answer": 2,
+        "hint": "Je nalevo na mapě."
+      },      
+      {
+        "question": "Která světová strana se nachází mezi východem a jihem?",
+        "options": ["Severozápad", "Jihozápad", "Jihovýchod", "Severovýchod"],
+        "answer": 2,
+        "hint": "Nachází se mezi východem a jižním směrem."
+      },
+      {
+        "question": "Která světová strana se nachází mezi západem a jihem?",
+        "options": ["Severozápad", "Jihovýchod", "Severovýchod", "Jihozápad"],
+        "answer": 3,
+        "hint": "Je na jihozápadní straně."
+      },
+      {
+        "question": "Která světová strana se při pohledu na mapu nachází vpravo?",
+        "options": ["Sever", "Severovýchod", "Východ", "Jihozápad"],
+        "answer": 2,
+        "hint": "Je napravo na mapě."
+      },
+    ]
+  },
+  
+  {
     "name": "Obecné znalosti",
     "id": "a9x7k2j3l5",
     "created": "2024-10-15",

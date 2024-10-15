@@ -306,19 +306,18 @@ body {
 .banner-title {
   font-size: 22px; 
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .banner-message {
   font-size: 16px; 
-  /*color: #f1f1f1;*/
-  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .banner-scorecard {
   font-size: 48px; 
   font-weight: bold;
   color: white;
+  margin-top: 10px;
 }
 
 .completion-status-level {
@@ -327,8 +326,8 @@ body {
 }
 
 .completion-status-xp {
-  border: 1px solid var(--bg-status-xp);
-  color: var(--bg-status-xp);
+  border: 1px solid var(--bg-status-attention); /*var(--bg-status-xp);*/
+  color: var(--bg-status-attention); /*var(--bg-status-xp);*/  
 }
 
 .text-list-item span {
@@ -348,7 +347,7 @@ body {
   padding: 3px 5px;;
   margin-right: 5px;
   border-radius: 5px;
-  color: var(--text-main);
+  /*color: var(--text-main);*/
 }
 
 .status-card-level {
