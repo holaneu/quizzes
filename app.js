@@ -1,7 +1,10 @@
 // app configs
 const appConfigs = {
   userProfileStorageKey: "quizzes_user_profile",
-  xpPointsToLevel: 20
+  xpsToUpLevel: 20,
+  xpsForCorrectQuestion: 1,
+  xpsForCompletedQuiz: 2,
+  minScoreToRewardQuizCompletation: 70
 };
 
 let quizzes = [];
@@ -17,9 +20,21 @@ function getLevelUpBanner() {
   const profile = loadUserProfile();
   return `
       <div class="h-space"></div>
-      <div class="completion-status-banner status-attention">
-        <div class="banner-title">Congratulations! Level Up!</div>
-        <div class="banner-message">You achieved new level ${profile.level}!</div>
+      <div class="completion-status-banner completion-status-level">
+        <div class="banner-title">Level Up! Level ${profile.level}</div>
+        <div class="banner-message">You achieved new <span class="bold">Level ${profile.level}</span></div>
+      </div>
+  `;
+}
+
+function getXpRewardBanner(xpReward) {
+  //`Wow, you earned +${questionXpReward} XPs`;
+  const profile = loadUserProfile();
+  return `
+      <div class="h-space"></div>
+      <div class="completion-status-banner completion-status-xp">
+        <div class="banner-title">+${xpReward}</div>
+        <div class="banner-message">You earned <span class="bold">+${xpReward} XPs</span></div>
       </div>
   `;
 }
@@ -84,21 +99,28 @@ function loadQuestion() {
 
 // Check selected answer
 function checkAnswer(choice) {
+    let questionXpReward = 0;
     const q = currentQuiz.questions[currentQuizQuestion];
     const resultDiv = document.getElementById('result');
     if (choice === q.answer) {        
         currentQuizScore++;
         currentQuizProgress.push("✓");        
-        updateUserProfileStats('totalXPPoints', 1);
-        updateUserProfileStats('questionsCompletedCorrectly', 1);
+        updateUserProfileStats('totalXPPoints', appConfigs.xpsForCorrectQuestion);
+        questionXpReward = appConfigs.xpsForCorrectQuestion;
+        updateUserProfileStats('questionsCompletedCorrectly', 1);        
 
         resultDiv.innerHTML = `
             <div class="completion-status-banner status-success">
-              <div class="banner-title">Correct :-)</div>
+              <div class="banner-title">Correct 🙂</div>
               <div class="banner-message">You are right, the answer is:</div>
               <div class="banner-message">${q.options[q.answer]}</div>
             </div>
         `;
+
+        if (questionXpReward > 0) {
+          resultDiv.innerHTML += getXpRewardBanner(questionXpReward);
+          questionXpReward = 0;
+        }
         
         if (hasLeveledUp) {
           resultDiv.innerHTML += getLevelUpBanner();
@@ -138,6 +160,7 @@ function showHint() {
 // Load the next question
 function nextQuestion() {
     currentQuizQuestion++;
+    let quizXpReward = 0;
     if (currentQuizQuestion < currentQuiz.questions.length) {     
       loadQuestion();
     } else {
@@ -147,8 +170,9 @@ function nextQuestion() {
       document.getElementById('next-btn').classList.add('hidden');      
       const quizScorePercent = Math.round((currentQuizScore / currentQuiz.questions.length) * 100);
       updateUserProfileStats('quizzesCompleted', 1);
-      if (quizScorePercent >= 70) {
-        updateUserProfileStats('totalXPPoints', 2);         
+      if (quizScorePercent >= appConfigs.minScoreToRewardQuizCompletation) {
+        quizXpReward = appConfigs.xpsForCompletedQuiz;
+        updateUserProfileStats('totalXPPoints', appConfigs.xpsForCompletedQuiz);
       }  
 
       const resultDiv = document.getElementById('result');
@@ -159,6 +183,11 @@ function nextQuestion() {
             <div class="banner-scorecard">${quizScorePercent} %</div>
           </div>          
       `;
+
+      if (quizXpReward > 0) {
+        resultDiv.innerHTML += getXpRewardBanner(quizXpReward);
+        quizXpReward = 0;
+      }
 
       if (hasLeveledUp) {        
         resultDiv.innerHTML += getLevelUpBanner();
@@ -318,7 +347,7 @@ function updateUserProfileStats(statName, value) {
   }
 
   //const calculatedLevel = Math.floor(profile.totalXPPoints / 20);
-  profile.level = Math.floor(profile.totalXPPoints / appConfigs.xpPointsToLevel) + 1; //calculatedLevel > 0 ? calculatedLevel : 1;
+  profile.level = Math.floor(profile.totalXPPoints / appConfigs.xpsToUpLevel) + 1; //calculatedLevel > 0 ? calculatedLevel : 1;
 
   profile.lastActiveDate = new Date().toISOString();
 

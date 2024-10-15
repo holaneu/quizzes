@@ -124,7 +124,6 @@ It includes details like color schemes (color palette), font choices, icon style
           --bg-status-success: #73be85;
           --bg-status-fail: #b1676e; /* Error or validation warning messages */
           --bg-status-attention: #c0ac6e; /* Warning or caution */
-
           
           /* Text Colors */
           --text-main: #e0e0e0; /* Main text color */

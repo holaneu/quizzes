@@ -1,6 +1,160 @@
 const jsFileQuizzesData = [
   {
+    "name": "Obecné znalosti",
+    "id": "a9x7k2j3l5",
+    "created": "2024-10-15",
+    "tags": ["znalosti"],
+    "questions": [
+      {
+        "question": "Jaké je hlavní město České republiky?",
+        "options": ["Brno", "Ostrava", "Plzeň", "Praha"],
+        "answer": 3,
+        "hint": "Jedná se o největší město České republiky."
+      },
+      {
+        "question": "Který prvek má chemickou značku 'O'?",
+        "options": ["Kyslík", "Vodík", "Uhlík", "Dusík"],
+        "answer": 0,
+        "hint": "Tento prvek je životně důležitý pro dýchání."
+      },
+      {
+        "question": "Kdy začala první světová válka?",
+        "options": ["1905", "1914", "1939", "1945"],
+        "answer": 1,
+        "hint": "Začala ve druhé dekádě 20. století."
+      },
+      {
+        "question": "Kolik měsíců má rok?",
+        "options": ["10", "11", "12", "13"],
+        "answer": 2,
+        "hint": "Odpověď odpovídá počtu měsíců v kalendářním roce."
+      },
+      {
+        "question": "Jak se jmenuje český prezident zvolený v roce 2023?",
+        "options": ["Miloš Zeman", "Petr Pavel", "Václav Klaus", "Andrej Babiš"],
+        "answer": 1,
+        "hint": "Tento prezident je bývalý generál."
+      },
+      {
+        "question": "Který z těchto států nepatří do Evropské unie?",
+        "options": ["Švýcarsko", "Itálie", "Francie", "Španělsko"],
+        "answer": 0,
+        "hint": "Tato země se nachází ve střední Evropě, ale není členem EU."
+      },
+      {
+        "question": "Co je hlavní složkou ve sklenici vody?",
+        "options": ["Oxid uhličitý", "Vodík", "Kyslík", "Dusík"],
+        "answer": 1,
+        "hint": "Tato složka má symbol H."
+      }
+    ]
+  },
+  
+  {
+    "name": "Český kvíz",
+    "id": "fj49ks72wd",
+    "created": "2024-10-15",
+    "tags": ["česko"],
+    "questions": [
+      {
+        "question": "Které město je hlavním městem České republiky?",
+        "options": ["Brno", "Plzeň", "Praha", "Ostrava"],
+        "answer": 2,
+        "hint": "Je to největší město v zemi."
+      },
+      {
+        "question": "Jaká řeka protéká hlavním městem Prahou?",
+        "options": ["Labe", "Vltava", "Dunaj", "Sázava"],
+        "answer": 1,
+        "hint": "Tato řeka se objevuje v mnoha českých písních."
+      },
+      {
+        "question": "Který z těchto českých hradů je největší?",
+        "options": ["Karlštejn", "Hluboká", "Pražský hrad", "Křivoklát"],
+        "answer": 2,
+        "hint": "Nachází se v hlavním městě."
+      },
+      {
+        "question": "Jak se jmenuje tradiční český pokrm z brambor, který se podává s kysaným zelím a uzeným masem?",
+        "options": ["Svíčková", "Vepřo knedlo zelo", "Bramborák", "Škubánky"],
+        "answer": 2,
+        "hint": "Je to bramborová placka."
+      },
+      {
+        "question": "Jak se jmenuje nejvyšší hora České republiky?",
+        "options": ["Lysá hora", "Sněžka", "Radhošť", "Ještěd"],
+        "answer": 1,
+        "hint": "Leží na hranici s Polskem."
+      },
+      {
+        "question": "Který český spisovatel napsal knihu „Osudy dobrého vojáka Švejka“?",
+        "options": ["Karel Čapek", "Jaroslav Hašek", "Milan Kundera", "Bohumil Hrabal"],
+        "answer": 1,
+        "hint": "Je to slavné humoristické dílo z období první světové války."
+      },
+      {
+        "question": "Jak se jmenuje tradiční český alkoholický nápoj vyrobený z bylinných extraktů?",
+        "options": ["Slivovice", "Fernet", "Becherovka", "Borovička"],
+        "answer": 2,
+        "hint": "Pochází z Karlových Varů."
+      }
+    ]
+  },
+  
+  {
+    "name": "Základy zeměpisu",
+    "id": "n4dk7gh1t2",
+    "created": "2024-10-15",
+    "tags": ["zeměpis"],
+    "questions": [
+      {
+        "question": "Které město je hlavním městem Francie?",
+        "options": ["Madrid", "Paříž", "Londýn", "Řím"],
+        "answer": 1,
+        "hint": "Toto město je známé Eiffelovou věží."
+      },
+      {
+        "question": "Která země je největší na světě podle rozlohy?",
+        "options": ["Kanada", "Čína", "Rusko", "Spojené státy"],
+        "answer": 2,
+        "hint": "Tato země je známá pro své rozsáhlé Sibiře."
+      },
+      {
+        "question": "Jaký je název nejdelší řeky na světě?",
+        "options": ["Nil", "Amazonka", "Volha", "Mississippi"],
+        "answer": 1,
+        "hint": "Tato řeka se nachází v Jižní Americe."
+      },
+      {
+        "question": "Který oceán je největší na světě?",
+        "options": ["Atlantický oceán", "Indický oceán", "Tichý oceán", "Severní ledový oceán"],
+        "answer": 2,
+        "hint": "Tento oceán pokrývá většinu plochy mezi Amerikami a Asií."
+      },
+      {
+        "question": "Jaký je název nejvyšší hory na světě?",
+        "options": ["K2", "Kilimandžáro", "Mount Everest", "Mont Blanc"],
+        "answer": 2,
+        "hint": "Tato hora se nachází na hranici mezi Nepálem a Čínou."
+      },
+      {
+        "question": "Který stát má nejvíce obyvatel?",
+        "options": ["Spojené státy", "Čína", "Indie", "Brazílie"],
+        "answer": 1,
+        "hint": "Tato země se nachází ve východní Asii."
+      },
+      {
+        "question": "Jaký je název největšího jezera na světě podle rozlohy?",
+        "options": ["Hořejší jezero", "Kaspické moře", "Bajkalské jezero", "Viktoriino jezero"],
+        "answer": 1,
+        "hint": "Toto jezero se nachází mezi Evropou a Asií."
+      }
+    ]
+  },
+
+  {
     "name": "Živá a neživá příroda",
+    "id" : "OJbdKHh068",
     "created": "2024-09-19",
     "tags": ["přírodověda"],
     "questions": [
@@ -39,29 +193,30 @@ const jsFileQuizzesData = [
   
   {
     "name": "Emoce z filmu V hlavě",
+    "id" : "WNjTYLPFVh",
     "created": "2024-09-19",
     "tags": ["emoce"],
     "questions": [
       {
-        "question": "Která z emocí ve filmu \"V hlavě\" je zodpovědná za regulaci strachu?",
+        "question": "Která z emocí je zodpovědná za regulaci strachu?",
         "options": ["Radost", "Strach", "Smutek", "Znechucení"],
         "answer": 1,
         "hint": "Tato emoce nás udržuje ve střehu před nebezpečím."
       },
       {
-        "question": "Jaká emoce v \"V hlavě\" nejčastěji pomáhá při vytváření pozitivních vzpomínek?",
+        "question": "Jaká emoce nejčastěji pomáhá při vytváření pozitivních vzpomínek?",
         "options": ["Hněv", "Strach", "Radost", "Znechucení"],
         "answer": 2,
         "hint": "Tato emoce je spojená s radostí a veselím."
       },
       {
-        "question": "Která z emocí ve filmu má tendenci být pesimistická a připravovat na horší scénáře?",
+        "question": "Která z emocí má tendenci být pesimistická a připravovat na horší scénáře?",
         "options": ["Smutek", "Radost", "Znechucení", "Strach"],
         "answer": 0,
         "hint": "Její roli je často nepochopená, ale důležitá pro emocionální rovnováhu."
       },
       {
-        "question": "Která emoce v \"V hlavě\" se zaměřuje na ochranu před fyzickým nebezpečím a infekcí?",
+        "question": "Která emoce se zaměřuje na ochranu před fyzickým nebezpečím a infekcí?",
         "options": ["Hněv", "Strach", "Znechucení", "Radost"],
         "answer": 2,
         "hint": "Tato emoce nás chrání před věcmi, které mohou být škodlivé."
@@ -71,20 +226,27 @@ const jsFileQuizzesData = [
 
   {
     "name": "Test quiz 1",
-    "created": 1725959880633,
+    "id" : "vqCTXVTUjC",
+    "created": "2024-09-05",
     "tags": ["tag1"],
     "questions": [
       {
         "question": "Question 1",
         "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": 1,
+        "answer": 0,
         "hint": "Hint 1"
       },
       {
         "question": "Question 2",
         "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": 1,
+        "answer": 0,
         "hint": "Hint 2"
+      },
+      {
+        "question": "Question 3",
+        "options": ["option 1", "option 2", "option 3", "option 4"],
+        "answer": 0,
+        "hint": "Hint 1"
       }
     ]
   }

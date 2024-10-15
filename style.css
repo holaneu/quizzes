@@ -16,8 +16,9 @@
   --bg-status-success: #73be85;
   --bg-status-fail: #b1676e; /* Error or validation warning messages */
   --bg-status-attention: #c0ac6e; /* Warning or caution */
-
-  
+  --bg-status-level: #64edcf;
+  --bg-status-xp: #d2d442;
+    
    /* Text Colors */
   --text-main: #e0e0e0; /* Main text color */
   --text-secondary: #e0e0e0; /* Main text color */
@@ -45,6 +46,10 @@ body {
     display: none;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .text-center {
   text-align: center;
 }
@@ -69,6 +74,7 @@ body {
   color: white;
 }
 
+
 /* UI elements */
 .screen-title {
     text-align: center;
@@ -82,13 +88,13 @@ body {
 
 .section-title {
     color: gray; /*var(--text-secondary);*/
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
     margin-top: 15px;    
     margin-bottom: 13px; 
     text-align: left; 
-    letter-spacing: 2px; 
+    letter-spacing: 1px; 
 }
 
 .header3 {
@@ -160,17 +166,16 @@ body {
 }
 
 .back-btn {
-    cursor: pointer;
-    margin-bottom: 10px;
-    /*display: inline-block;*/
-    color: var(--text-main);
-    text-align: left;
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: var(--text-main);
+  text-align: left;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg>');
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 35px; /* Adjust this as necessary for spacing */
 }
 
-.back-btn svg {
-  width: 16px;
-  height: 16px;
-}
 
 .text {
   padding: 10px;
@@ -274,7 +279,7 @@ body {
 .logo {
   /*color: var(--color-primary);*/
   font-style: italic;
-  background: linear-gradient(to bottom, #C7B8EA, #6c5ce7);
+  background: linear-gradient(to bottom, #d3c5f3, var(--color-primary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -291,8 +296,7 @@ body {
 }
 
 .completion-status-banner {
-  color: white;
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   max-width: 400px;
   margin: 0 auto; 
@@ -300,21 +304,31 @@ body {
 }
 
 .banner-title {
-  font-size: 24px; 
+  font-size: 22px; 
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 .banner-message {
   font-size: 16px; 
-  color: #f1f1f1;
-  margin-bottom: 20px;
+  /*color: #f1f1f1;*/
+  margin-bottom: 15px;
 }
 
 .banner-scorecard {
   font-size: 48px; 
   font-weight: bold;
   color: white;
+}
+
+.completion-status-level {
+  border: 1px solid var(--bg-status-level);
+  color: var(--bg-status-level);
+}
+
+.completion-status-xp {
+  border: 1px solid var(--bg-status-xp);
+  color: var(--bg-status-xp);
 }
 
 .text-list-item span {
@@ -334,15 +348,16 @@ body {
   padding: 3px 5px;;
   margin-right: 5px;
   border-radius: 5px;
+  color: var(--text-main);
 }
 
-.status-level {
+.status-card-level {
   background-color: #64edcf;
   color: var(--bg-main);
   cursor: pointer;
 }
 
-.status-xp {
+.status-card-xp {
   background-color: #d2d442;
   color: var(--bg-main);
   cursor: pointer;
@@ -356,5 +371,9 @@ body {
 #quiz-info {
   color:gray;
   font-size: 14px;
+}
+
+#quiz-info div {
+  font-size: inherit;
 }
   
