@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes</title>
+    <!-- loads data (array of quizzes) accessible as window.quizzesData -->
+    <script id="quizzes-data" src="quizzes-data.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <section id="home-screen">
+        <div class="top-nav-bar">
+            <h2 class="logo">Quizzes</h2>
+            <!--<div class="text-input">test</div>-->
+            <div class="flex-right" onclick="navigateToScreen('profile-screen')">              
+              <div class="status-card status-card-level">Level <span id="topbar-currentLevel"></span></div>
+              <div class="status-card status-card-xp"><span id="topbar-totalXPPoints"></span> XPs</div>
+              <div class="top-nav-bar-icon"> 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                </svg>
+              </div>
+            </div>
+        </div>
+        <div class="section-title">All quizzes</div>
+        <ul class="card-list" id="quiz-list"></ul>
+    </section>
+
+    <!-- Quiz Detail Screen -->
+    <section id="quiz-detail-screen" class="hidden">
+        <div class="back-btn" onclick="navigateToScreen('home-screen')">Back</div>
+        <h2 class="screen-title" id="quiz-title" ></h2>
+        <div id="quiz-info">
+          <div id="questions-count"></div>
+          <div id="score"></div>
+          <div id="progress"></div>
+          <div id="hints-used"></div>
+        </div>
+        <div class="h-space"></div>
+        <div class="question-header text-center" id="question" ></div>
+        <div id="options"></div>
+        <div class="h-space"></div>
+        <button class="btn-outline" id="hint-btn" onclick="showHint()">Show Hint</button>
+        <div class="text hidden" id="hint"></div>
+        <div id="result"></div>
+        <div class="h-space"></div>
+        <button class="btn btn-primary hidden" id="next-btn" onclick="nextQuestion()">Next Question</button>
+    </section>
+
+    <!-- Profile Screen -->
+    <section id="profile-screen" class="hidden">
+        <div class="back-btn" onclick="navigateToScreen('home-screen')">Back</div>
+        <h2 class="screen-title">Profile</h2>
+
+        <!-- User Info Section --> 
+        <div class="hidden" id="user-info">       
+          <div class="section-title">User info</div>
+          <div class="text-list-item">Name: <span id="info-name"></span></div>
+          <div class="h-space"></div>
+        </div>        
+
+        <!-- Statistics Section -->
+        <div id="statistics">
+          <h3 class="section-title">Statistics</h3>
+          <div class="text-list-item">Total XP Points: <span id="stat-totalXPPoints"></span></div>
+          <div class="text-list-item">Current Level: <span id="stat-currentLevel"></span></div>
+          <div class="text-list-item">Total Score: <span id="stat-totalScore"></span></div>
+          <div class="text-list-item">Quizzes Completed: <span id="stat-quizzesCompleted"></span></div>
+          <div class="text-list-item">Questions Completed: <span id="stat-questionsCompleted"></span></div>
+          <div class="text-list-item">Questions Completed Correctly: <span id="stat-questionsCompletedCorrectly"></span></div>
+          <div class="text-list-item">Last Active: <span id="stat-lastActiveDate"></span></div>
+        </div>
+        <div class="h-space"></div>
+
+        <!-- Achievements Section -->
+        <div class="hidden" id="achievements">
+          <h3 class="section-title">Achievements</h3>
+          <ul class="card-list" id="achievements-list"></ul>
+        </div>   
+        
+        <button class="btn-outline" id="export-profile" onclick="exportUserProfile()">Export profile</button>
+        <button class="btn-outline" id="import-profile" onclick="showImportUserProfileConfirmation()">Import profile</button>
+        <button class="btn-outline" id="reset-profile" onclick="showResetUserProfileConfirmation()">Reset profile</button>
+        
+    </section>
+
+    <script id="quizzes-js" src="app.js"></script>
+</body>
+</html>
