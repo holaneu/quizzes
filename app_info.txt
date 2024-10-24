@@ -9,6 +9,7 @@
 ### Features:
 - **List of quizzes**: Displays a list of available quizzes, showing the title and the total number of questions. Users can browse and select a quiz to start.
 - **Multiple-choice questions**: Each question presents four possible answers, and the user selects one.
+- **Shuffled Questions and Answers:** Each quiz will load with a random order of questions, and the answer options for each question will be randomly shuffled while maintaining the correct answer.
 - **Hints**: Users can request a hint for each question. The app keeps track of how many hints the user has used.
 - **Instant feedback**: After answering a question, users are informed if their answer was correct, along with the correct answer if they were wrong.
 - **Progress tracking**: The app tracks the user's score and displays progress for each question answered. Users also earn experience points (XP).
@@ -77,9 +78,10 @@
 ### **Profile Screen:**  
 - **Purpose:** Displays the user's profile information, including statistics, achievements, and performance metrics.
 - **Content:** 
-  - **User Info Section:** Displays the user's name and XP points.
+  - **User Info Section:** Displays the user's info - name, email, avatar. **[currently disabled]**
   - **Statistics Section:** Shows various performance metrics, including total XP points, current level, total score percentage, quizzes completed, questions completed, questions completed correctly, and last active date.
-  - **Achievements Section:** Lists the achievements earned by the user.
+  - **Achievements Section:** Lists the achievements earned by the user. **[currently disabled]**
+  - **Profile Data Management Section:** Shows buttons allowing to export, import and reset profile data.
 - **UI Elements**:
   - Back button with left-arrow icon.
   - Screen title (Profile).
@@ -90,6 +92,7 @@
   - Section title (Achievements)
   - Card list (Achievements)
   - Button outline (Export profile)
+  - Button outline (Import profile)
   - Button outline (Reset profile)
 - **Navigation:** Users can tap a back icon to go to the "home screen".
   

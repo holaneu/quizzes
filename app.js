@@ -72,7 +72,7 @@ function loadQuizList() {
     quizzes.forEach((quiz, index) => {
         const quizItem = document.createElement('li');
         quizItem.innerHTML = `
-            <button class="card-item" onclick="startQuiz(${index})">                      
+            <button class="card-item" onclick="startQuiz('${quiz.id}')">                      
                 <div class="card-content">
                 <span class="card-title">${quiz.name}</span>
                 <span class="card-badge">${quiz.questions.length} questions</span>
@@ -82,18 +82,30 @@ function loadQuizList() {
     });
 }
 
-function startQuiz(quizIndex) {
-  currentQuiz = quizzes[quizIndex];
+function startQuiz(quizId) {
+  // Find the quiz by its id, instead of filtering (which returns an array)
+  currentQuiz = quizzes.find(function(quiz) {
+    return quiz.id === quizId;
+  });
+
+  // Ensure the quiz is found
+  if (!currentQuiz) {
+    console.error(`Quiz with id ${quizId} not found.`);
+    return;
+  }
 
   // Shuffle questions
   currentQuiz.questions = shuffleArray(currentQuiz.questions);
 
+  // Display quiz details in the UI
   document.getElementById('quiz-title').textContent = currentQuiz.name;
   document.getElementById('questions-count').textContent = "Questions: " + currentQuiz.questions.length;
+
   resetQuiz();
   navigateToScreen('quiz-detail-screen');
   loadQuestion();
 }
+
 
 
 // Load current question
@@ -102,9 +114,24 @@ function loadQuestion() {
     document.getElementById('question').textContent = q.question;
     const options = document.getElementById('options');
     options.innerHTML = '';
-    q.options.forEach((option, i) => {
-        options.innerHTML += `<button class="btn" onclick="checkAnswer(${i})">${option}</button>`;
+
+    optionsConverted = q.options.map(function(option, i){ 
+      let optionObj = {
+        text: option
+      };
+      if (i === q.answer) {
+        optionObj.isCorrect = true;
+      }
+      return optionObj;
     });
+
+    // Shuffle options
+    optionsConverted = shuffleArray(optionsConverted);
+
+    optionsConverted.forEach((option, i) => {
+      options.innerHTML += `<button class="btn" onclick="checkAnswer(${option.isCorrect})">${option.text}</button>`;
+    });
+
     document.getElementById('hint').textContent = '';
     document.getElementById('result').innerHTML = ''; //textContent = '';
     document.getElementById('hint-btn').classList.remove('hidden'); //.style.display = 'block';
@@ -116,7 +143,7 @@ function checkAnswer(choice) {
     let questionXpReward = 0;
     const q = currentQuiz.questions[currentQuizQuestion];
     const resultDiv = document.getElementById('result');
-    if (choice === q.answer) {        
+    if (choice) {        
         currentQuizScore++;
         currentQuizProgress.push("✓");        
         updateUserProfileStats('totalXPPoints', appConfigs.xpsForCorrectQuestion);
@@ -269,7 +296,7 @@ function loadUserProfileIntoUI(profileBeforeUpdate) {
   }
 }
 
-function resetUserProfile(/*REMOVE:resetWithConfirmation*/) {
+function resetUserProfile() {
   const newUserProfile = {
     name: "user" + Math.floor(Math.random(100)*1000),
     email: "",
@@ -286,18 +313,8 @@ function resetUserProfile(/*REMOVE:resetWithConfirmation*/) {
       theme: "dark",
       notifications: false
     }
-  };
-  /*REMOVE:
-  if (resetWithConfirmation === true) {
-    if (confirm("!!! Are you sure you want to reset (delete) your profile?") === true) {
-      saveUserProfile(newUserProfile);
-      loadUserProfileIntoUI();
-    }
-  } else {
-    saveUserProfile(newUserProfile);
-    loadUserProfileIntoUI();
-  }
-  */
+  };  
+  
   saveUserProfile(newUserProfile);
   loadUserProfileIntoUI();
 }
