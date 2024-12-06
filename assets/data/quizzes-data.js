@@ -1,5 +1,106 @@
 const jsFileQuizzesData = [
   {
+    "id": "aB12cD3eFg",
+    "name": "Informatika - Hardware a software",
+    "created": "2024-12-06",
+    "tags": ["informatika", "hardware", "software"],
+    "questions": [
+      {
+        "question": "Co znamená pojem hardware?",
+        "options": [
+          "Veškeré fyzické vybavení počítače, na které si můžeme sáhnout",
+          "Programové vybavení počítače",
+          "Internetové připojení",
+          "Ukládací zařízení"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Co patří do základní počítačové sestavy?",
+        "options": [
+          "Počítačová skříň, monitor, klávesnice, myš",
+          "Programovací jazyk, aplikace, dokumenty",
+          "Monitor, tiskárna, klávesnice, skener",
+          "Internet, USB, tiskárna, reproduktory"
+        ],
+        "answer": 0,
+        "hint": "Základní sestava zahrnuje zařízení potřebná k základnímu ovládání počítače."
+      },
+      {
+        "question": "Co označuje pojem vstupní zařízení?",
+        "options": [
+          "Zařízení sloužící pro ukládání dat",
+          "Zařízení umožňující zadávat informace do počítače",
+          "Zařízení určená pouze pro tisk",
+          "Programové vybavení pro práci s daty"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Co označuje pojem výstupní zařízení?",
+        "options": [
+          "Zařízení sloužící pro ukládání dat",
+          "Zařízení umožňující zobrazovat a vydávat informace",
+          "Zařízení určená pouze pro tisk",
+          "Programové vybavení pro práci s daty"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Jak byste popsali pojem software?",
+        "options": [
+          "Fyzické vybavení počítače",
+          "Elektrické součásti počítače",
+          "Programy, které počítač použivá k nějaké práci",
+          "Kabelové připojení"
+        ],
+        "answer": 2,
+        "hint": "Software jsou programy, které umožňují počítači vykonávat různé úkoly. NEMŮŽEME si na něj sáhnout."
+      },
+      {
+        "question": "Jaké jsou hlavní druhy softwaru?",
+        "options": [
+          "Operační software, aplikační software, bezpečnostní software",
+          "Monitor, klávesnice, myš",
+          "Tiskárny, skenery, plottery",
+          "Textové soubory, obrázky, videa"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Jak se jmenuje zařízení, které převádí data z papíru do počítače?",
+        "options": [
+          "Monitor",
+          "Skener",
+          "Myš",
+          "Klávesnice"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Jak se jmenuje zařízení, které poskytuje zvukový výstup z počítače?",
+        "options": [
+          "Sluchátka nebo reproduktory",
+          "Monitor",
+          "Tiskárna",
+          "Klávesnice"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Jak se jmenuje zařízení, které umožňuje tisknout znaky a obrázky?",
+        "options": [
+          "Klávesnice",
+          "Tiskárna",
+          "Monitor",
+          "Reproduktor"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+
+  {
     "name": "Světové strany",
     "id": "9bA7cV2pX3",
     "created": "2024-10-15",
@@ -298,34 +399,8 @@ const jsFileQuizzesData = [
         "hint": "Tato emoce nás chrání před věcmi, které mohou být škodlivé."
       }
     ]
-  },
-
-  {
-    "name": "Test quiz 1",
-    "id" : "vqCTXVTUjC",
-    "created": "2024-09-05",
-    "tags": ["tag1"],
-    "questions": [
-      {
-        "question": "Question 1",
-        "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": 0,
-        "hint": "Hint 1"
-      },
-      {
-        "question": "Question 2",
-        "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": 0,
-        "hint": "Hint 2"
-      },
-      {
-        "question": "Question 3",
-        "options": ["option 1", "option 2", "option 3", "option 4"],
-        "answer": 0,
-        "hint": "Hint 1"
-      }
-    ]
-  }
+  }  
+  
 ];
 
 // Expose the data to the global scope
